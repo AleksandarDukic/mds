@@ -8,6 +8,8 @@ import { TodoFormComponent } from "./components/todo-form/todo-form.component";
 import { TodoItemComponent } from "./components/todo-item/todo-item.component";
 import { TodoListComponent } from "./components/todo-list/todo-list.component";
 import { TodoPageComponent } from "./pages/todo-page/todo-page.component";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,7 @@ import { TodoPageComponent } from "./pages/todo-page/todo-page.component";
     TodoFormComponent,
     TodoListComponent
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, NgbModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
