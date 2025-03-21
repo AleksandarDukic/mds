@@ -13,7 +13,7 @@ import { TodoService } from "../../services/todo.service";
             type="text"
             id="title"
             class="form-input"
-            [(ngModel)]="tittle"
+            [(ngModel)]="title"
             name="title"
             placeholder="Enter todo title"
             required

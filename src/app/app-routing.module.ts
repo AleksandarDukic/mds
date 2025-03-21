@@ -4,7 +4,7 @@ import { TodoPageComponent } from "./pages/todo-page/todo-page.component";
 
 
 const routes: Routes = [
-  { path: "", component: NonExistingComponent },
+  { path: "", component: TodoPageComponent },
   { path: "todos", component: TodoPageComponent },
   { path: "**", redirectTo: "" },
 ];

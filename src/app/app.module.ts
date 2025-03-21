@@ -14,6 +14,8 @@ import { TodoPageComponent } from "./pages/todo-page/todo-page.component";
     AppComponent,
     TodoItemComponent,
     TodoPageComponent,
+    TodoFormComponent,
+    TodoListComponent
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
