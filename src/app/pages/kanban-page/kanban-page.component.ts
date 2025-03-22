@@ -1,15 +1,22 @@
 import { Component } from "@angular/core";
+import { CreateCategoryDialogComponent } from "src/app/components/create-category-dialog/create-category-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-kanban-page",
-  template: `
-    <div class="container">
-      <div class="card">
-        kanban
-      </div>
-
-    </div>
-  `,
-  styles: [],
+  templateUrl: "kanban-page.component.html",
+  styleUrls: ["./kanban-page.component.scss"],
 })
-export class KanbanPageComponent {}
+export class KanbanPageComponent {
+  constructor(private dialog: MatDialog) {}
+
+  openAddCategoryDialog() {
+    const dialogRef = this.dialog.open(CreateCategoryDialogComponent, {
+      data: { name: "test" },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("The dialog was closed");
+    });
+  }
+}

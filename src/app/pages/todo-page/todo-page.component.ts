@@ -11,6 +11,7 @@ import { Component } from "@angular/core";
       <div class="card">
         <app-todo-list></app-todo-list>
       </div>
+      <a [routerLink]="['/kanban']">Kanban</a>
     </div>
   `,
   styles: [],

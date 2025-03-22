@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Todo } from "../../models/todo.model";
 import { TodoService } from "../../services/todo.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-todo-list",
@@ -33,15 +34,16 @@ import { TodoService } from "../../services/todo.service";
   `,
   styles: [],
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
   filter: string = "all";
   filteredTodos: Todo[] = [];
+  todosSub: Subscription | null = null;
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.todoService.getTodos().subscribe((todos) => {
+    this.todosSub = this.todoService.getTodos().subscribe((todos) => {
       this.todos = todos;
       this.applyFilter();
     });
@@ -60,5 +62,9 @@ export class TodoListComponent implements OnInit {
     } else {
       this.filteredTodos = [...this.todos];
     }
+  }
+
+  ngOnDestroy(): void {
+    this.todosSub?.unsubscribe();
   }
 }

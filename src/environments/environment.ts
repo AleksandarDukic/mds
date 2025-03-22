@@ -3,7 +3,7 @@ export const environment = {
   defaultCategoryName: 'Default',
   dataTableNames: {
     todos: 'todos',
-    //categoryTable: 'categories',
+    categories: 'categories',
     //todosByCategory: 'todosByCategry',
     //todosByPriority: 'todosByPriority'
   },
