@@ -1,4 +1,6 @@
-<app-kanban-category
-  *ngFor="let category of categories"
-  [category]="category"
+<app-kanban-category *ngFor="let category of categories" [category]="category"
+  ><app-kanban-item
+    *ngFor="let todo of todos | sortTodos : category"
+    [item]="todo"
+  ></app-kanban-item
 ></app-kanban-category>

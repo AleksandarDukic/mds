@@ -37,8 +37,8 @@ export class CreateCategoryDialogComponent {
   addCategory() {
     if (this.title.trim()) {
       this.categoryService.addCategory({
-        id: Date.now().toString(),
         title: this.title,
+        id: Date.now.toString(),
       });
       this.dialogRef.close();
       this.title = "";

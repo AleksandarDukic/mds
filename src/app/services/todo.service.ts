@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, catchError, Observable } from "rxjs";
 import { Todo } from "../models/todo.model";
 import { LocalStorageService } from "./local-storage.service";
 import { environment } from "src/environments/environment.prod";
@@ -21,9 +21,10 @@ export class TodoService {
     const todosTemp = [...this.todos, todo];
 
     try {
-    this.persistTodos(todosTemp);
-    }
-    catch(err) {
+      this.localStorageService.add(environment.data.todos, todo);
+      this.todos = todosTemp;
+      this.todosSubject.next(this.todos);
+    } catch (err) {
       console.error(err);
     }
   }
@@ -31,35 +32,32 @@ export class TodoService {
   toggleTodo(id: string): void {
     const todosTemp = this.todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
-  );
-  
-  try {
-      this.persistTodos(todosTemp);
+    );
 
-    } catch(err) {
-        console.error(err);
+    try {
+      this.localStorageService.save<Todo[]>(environment.data.todos, todosTemp);
+      this.todos = todosTemp;
+      this.todosSubject.next(this.todos);
+    } catch (err) {
+      console.error(err);
     }
   }
 
   deleteTodo(id: string): void {
-    const todosTemp  = this.todos.filter((todo) => todo.id !== id);
+    const todosTemp = this.todos.filter((todo) => todo.id !== id);
     try {
-      this.persistTodos(todosTemp);
-    }
-    catch(err) {
+      this.localStorageService.save<Todo[]>(environment.data.todos, todosTemp);
+      this.todos = todosTemp;
+      this.todosSubject.next(this.todos);
+    } catch (err) {
       console.error(err);
     }
   }
 
   loadTodos() {
-    const todosTemp = this.localStorageService.get<Todo[]>(environment.dataTableNames.todos) || [];
-    this.todos = todosTemp;
-    this.todosSubject.next(this.todos);
-  }
-
-  persistTodos(todos: Todo[]) {
-    this.localStorageService.save<Todo[]>(environment.dataTableNames.todos, todos);
-    this.todos = todos;
+    const localStorageTodos =
+      this.localStorageService.get<Todo[]>(environment.data.todos) || [];
+    this.todos = localStorageTodos;
     this.todosSubject.next(this.todos);
   }
 }

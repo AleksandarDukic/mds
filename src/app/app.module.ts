@@ -14,10 +14,10 @@ import { KanbanPageComponent } from "./pages/kanban-page/kanban-page.component";
 import { CreateCategoryDialogComponent } from "./components/create-category-dialog/create-category-dialog.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import { NgFor } from "@angular/common";
 import { KanbanListComponent } from "./components/kanban-list/kanban-list.component";
 import { KanbanCategoryComponent } from "./components/kanban-category/kanban-category.component";
 import { KanbanItemComponent } from "./components/kanban-item/kanban-item.component";
+import { SortTodosPipe } from "./pipes/sort-todos.pipe";
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { KanbanItemComponent } from "./components/kanban-item/kanban-item.compon
     KanbanListComponent,
     KanbanCategoryComponent,
     KanbanItemComponent,
+    SortTodosPipe,
   ],
   imports: [
     BrowserModule,

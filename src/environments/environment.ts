@@ -1,9 +1,10 @@
 export const environment = {
   production: false,
-  defaultCategoryName: 'Default',
-  dataTableNames: {
-    todos: 'todos',
-    categories: 'categories',
+  defaultCategoryName: "Default",
+  data: {
+    todos: "todos",
+    categories: "categories",
+    defaultCategory: "Unassigned",
     //todosByCategory: 'todosByCategry',
     //todosByPriority: 'todosByPriority'
   },

@@ -1,20 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class LocalStorageService {
-
-  constructor() { }
+  constructor() {}
 
   save<T>(key: string, data: T): void {
     try {
       // Try to store the item in localStorage
       localStorage.setItem(key, JSON.stringify(data));
     } catch (err) {
-        throw err;
+      throw err;
     }
-    
+  }
+
+  add<T>(key: string, data: T): void {
+    try {
+      // Try to store the item in localStorage
+      const currentArrayState = this.get<T[]>(key) || [];
+      localStorage.setItem(key, JSON.stringify(currentArrayState.concat(data)));
+    } catch (err) {
+      throw err;
+    }
   }
 
   get<T>(key: string): T | null {
@@ -27,14 +35,13 @@ export class LocalStorageService {
           return JSON.parse(storedData) as T;
         } catch (err) {
           // Handle parsing errors (malformed JSON)
-          throw err
+          throw err;
         }
       }
 
       return null; // Return null if data doesn't exist
     } catch (err) {
-      throw err
+      throw err;
     }
   }
-
 }

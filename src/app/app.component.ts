@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { TodoService } from "./services/todo.service";
-import { CategoryService } from "./services/category.service";
+
+import { InitService } from "./services/init.service";
 
 @Component({
   selector: "app-root",
@@ -10,13 +10,9 @@ import { CategoryService } from "./services/category.service";
 export class AppComponent implements OnInit {
   title = "todo-angular";
 
-  constructor(
-    private todoService: TodoService,
-    private categoryService: CategoryService
-  ) {}
+  constructor(private initService: InitService) {}
 
   ngOnInit(): void {
-    this.todoService.loadTodos();
-    this.categoryService.loadCategoryList();
+    this.initService.init();
   }
 }

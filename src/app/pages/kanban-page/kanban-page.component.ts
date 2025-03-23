@@ -11,12 +11,8 @@ export class KanbanPageComponent {
   constructor(private dialog: MatDialog) {}
 
   openAddCategoryDialog() {
-    const dialogRef = this.dialog.open(CreateCategoryDialogComponent, {
-      data: { name: "test" },
-    });
+    const dialogRef = this.dialog.open(CreateCategoryDialogComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log("The dialog was closed");
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }
