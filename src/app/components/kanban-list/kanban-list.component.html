@@ -1,6 +1,40 @@
-<app-kanban-category *ngFor="let category of categories" [category]="category"
-  ><app-kanban-item
-    *ngFor="let todo of todos | sortTodos : category"
-    [item]="todo"
-  ></app-kanban-item
-></app-kanban-category>
+<div class="my-24 w-100">
+  <div
+    class="flex example-list"
+    cdkDropListGroup
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    (cdkDropListDropped)="listDrop($event)"
+  >
+    <app-kanban-category
+      *ngFor="let category of categories$ | async"
+      cdkDrag
+      cdkDropList
+      [cdkDropListData]="todos | sortTodos : category"
+      (cdkDropListDropped)="drop($event, category)"
+      class="flex-1 p-8 border-r border-gray-300 last:border-r-0 example-box"
+      ><div class="d-flex w-100 align-items-center">
+        <i class="material-icons add-icon" (click)="onAddTodo(category.id)"
+          >add_circle_outline</i
+        >
+
+        <h3 class="w-100">{{ category.title }}</h3>
+        <i
+          *ngIf="category.id != defaultCategoryId"
+          class="material-icons delete-icon"
+          (click)="deleteCategory(category)"
+          >delete</i
+        >
+      </div>
+      <app-kanban-item
+        cdkDrag
+        *ngFor="let todo of todos | sortTodos : category"
+        [item]="todo"
+        [attr.id]="todo.id"
+        class="my-2 w-100"
+        (click)="onEditTodo(todo)"
+        (onDeleteItem)="deleteItem($event)"
+      ></app-kanban-item
+    ></app-kanban-category>
+  </div>
+</div>

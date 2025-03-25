@@ -1,1 +1,13 @@
-<p>{{ item.title }}</p>
+<div class="card m-0 d-flex flex-column">
+  <div class="d-flex justify-content-between align-items-center">
+    <h5 class="m-0 todo-title" [ngClass]="item.completed ? 'strikeout' : ''">
+      {{ item.title }}
+    </h5>
+    <i class="material-icons delete-icon" (click)="deleteItem($event)"
+      >delete</i
+    >
+  </div>
+  <p *ngIf="item.dueDate" class="due-date mb-0 mt-2">
+    Due: {{ formatDate(item.dueDate) }}
+  </p>
+</div>

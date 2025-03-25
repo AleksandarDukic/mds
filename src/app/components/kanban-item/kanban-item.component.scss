@@ -1,0 +1,17 @@
+.strikeout {
+  text-decoration: line-through;
+}
+.delete-icon {
+  margin-left: 1rem;
+  color: rgba(255, 0, 0, 0.459);
+  cursor: pointer;
+  z-index: 100;
+  border-radius: 5px;
+  transition: all 0.2s ease-out;
+  border: 1px solid transparent;
+}
+
+.delete-icon:hover {
+  color: red;
+  border-color: black;
+}

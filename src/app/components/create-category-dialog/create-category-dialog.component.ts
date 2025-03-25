@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { CategoryService } from "src/app/services/category.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-category-create-dialog",
@@ -35,13 +36,16 @@ export class CreateCategoryDialogComponent {
   ) {}
 
   addCategory() {
-    if (this.title.trim()) {
+    if (
+      this.title.trim() &&
+      this.title.toLocaleLowerCase() !=
+        environment.data.defaultCategory.toLocaleLowerCase()
+    ) {
       this.categoryService.addCategory({
         title: this.title,
-        id: Date.now.toString(),
+        id: Date.now().toString(),
       });
       this.dialogRef.close();
-      this.title = "";
     }
   }
 }

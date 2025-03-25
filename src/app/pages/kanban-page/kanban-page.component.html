@@ -1,7 +1,12 @@
 <div class="container">
-  <button class="btn btn-primary mb-5" (click)="openAddCategoryDialog()">
-    Add Category
-  </button>
+  <div class="d-flex flex-column mt-2">
+    <a [routerLink]="['/']">Todos</a>
+    <button
+      class="btn btn-primary my-3 add-category__button"
+      (click)="openAddCategoryDialog()"
+    >
+      Add Category
+    </button>
+  </div>
   <app-kanban-list class="d-flex flex-wrap"></app-kanban-list>
-  <a [routerLink]="['/']">Todos</a>
 </div>

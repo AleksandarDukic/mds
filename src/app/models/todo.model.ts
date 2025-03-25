@@ -6,4 +6,5 @@ export interface Todo {
   completed: boolean;
   createdAt: Date;
   categoryId?: string;
+  position?: number;
 }

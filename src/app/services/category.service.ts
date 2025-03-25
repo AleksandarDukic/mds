@@ -41,9 +41,6 @@ export class CategoryService {
       );
       this.categories = categoriesTemp;
       this.categoriesSubject.next(this.categories);
-
-      // create empty category column
-      this.localStorageService.save<string[]>(category.title, []);
     } catch (err) {
       console.error(err);
     }
@@ -52,7 +49,21 @@ export class CategoryService {
   createDefaultCategory(): Category {
     return {
       title: environment.data.defaultCategory,
-      id: Date.now().toString(),
+      id: environment.data.defaultCategoryId,
+      position: 0,
     };
+  }
+
+  updateCategories(categories: Category[]) {
+    this.categories = categories;
+    this.localStorageService.save<Category[]>(
+      environment.data.categories,
+      this.categories
+    );
+    this.categoriesSubject.next([...this.categories]);
+  }
+
+  deleteCategory(category: Category) {
+    this.updateCategories(this.categories.filter((x) => x.id != category.id));
   }
 }
